@@ -29,11 +29,42 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window', silent = true })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window', silent = true })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window', silent = true })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window', silent = true })
+vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<cr>', { desc = 'Toggle NvimTree', silent = true })
 
+-- Buffer management
+vim.keymap.set('n', '<leader>n', ':bnext<cr>', { desc = 'Next buffer', silent = true })
+vim.keymap.set('n', '<leader>p', ':bprev<cr>', { desc = 'Prevous buffer', silent = true })
+vim.keymap.set('n', '<leader>q', ':bdelete<cr>', { desc = 'Close buffer', silent = true })
+vim.keymap.set('n', '<a-j>', ':m .+1<cr>==', { desc = 'Move line down', silent = true })
+vim.keymap.set('n', '<a-k>', ':m .-2<cr>==', { desc = 'Move line up', silent = true })
+vim.keymap.set('n', '<C-s>', ':w<cr>', { desc = 'Save buffer', silent = true })
+
+-- Visual Mode
+vim.keymap.set('v', 'J', ':m .+1<cr>==', { desc = 'Move line up', silent = true })
+vim.keymap.set('v', 'K', ':m .-2<cr>==', { desc = 'Move line down', silent = true })
+vim.keymap.set('v', '<a-j>', ':m +1<cr>==', { desc = 'Move line up', silent = true })
+vim.keymap.set('v', '<a-k>', ':m .-2<cr>==', { desc = 'Move live down', silent = true })
+vim.keymap.set('v', 'p', '"_dP', { desc = 'Special paste', silent = true })
+vim.keymap.set('v', '<', '<gv', { desc = 'Indent lines', silent = true })
+vim.keymap.set('v', '>', '>gv', { desc = 'Indent lines', silent = true })
+
+-- Visual Block
+vim.keymap.set('x', 'J', ":m '>+1<cr>==gv-gv", { desc = 'Move line up', silent = true })
+vim.keymap.set('x', 'K', ":m '<-2<cr>==gv-gv", { desc = 'Move Line down', silent = true })
+vim.keymap.set('x', '<a-j>', ":m '<+1<cr>==gv-gv", { desc = 'Move line up', silent = true })
+vim.keymap.set('x', '<a-k>', ":m '>-2<cr>==gv-gv", { desc = 'Move line down', silent = true })
+
+-- Insert Mode
+vim.keymap.set('i', '<a-j>', '<esc>:m +1<cr>==gi', { desc = 'Move line down', silent = true })
+vim.keymap.set('i', '<a-k>', '<esc>:m .-2<cr>==gi', { desc = 'Move line up', silent = true })
+vim.keymap.set('i', '<c-s>', '<esc>:w<cr>a', { desc = 'Move line up', silent = true })
+vim.keymap.set('i', '<c-a>', "<esc>gg'+yG", { desc = 'Move line down', silent = true })
+
+--
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -49,3 +80,4 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- vim: ts=2 sts=2 sw=2 et
+vim.keymap.set('i', 'jk', '<esc>', { desc = 'Exit insert mode' })
